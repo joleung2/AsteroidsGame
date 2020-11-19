@@ -18,7 +18,7 @@ public void draw()
   fill(0);
   background(0);
   if (accelerating == true) {
-    bob.accelerate(.5);
+    bob.accelerate(.15);
     fireUpdate();
     fire.show();
     accelerating = false;
@@ -58,7 +58,7 @@ public void keyPressed()
   if (key == 's') {
     if (bob.accessSpeed() >= -3)
     {
-      bob.accelerate(-0.5);
+      bob.accelerate(-0.15);
     }
   }
   if (key == 'a') {
