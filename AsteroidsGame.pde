@@ -1,5 +1,7 @@
 Spaceship bob = new Spaceship();
+boolean [] keys = new boolean[6];
 Rocket fire = new Rocket();
+ArrayList <Asteroid> rocks = new ArrayList <Asteroid>();
 Star [] sky = new Star[700];
 Boolean accelerating = false;
 Boolean hyperspace = false;
@@ -12,6 +14,11 @@ public void setup()
   {
     sky[i] = new Star();
   }
+  for (int i = 0; i < 15; i++)
+  {
+    rocks.add(new Asteroid());
+    rocks.get(i).respawn();
+  }
 }
 public void draw() 
 {
@@ -22,6 +29,14 @@ public void draw()
     fireUpdate();
     fire.show();
     accelerating = false;
+  }
+  if (keys[1]) {
+    bob.turn(-5);
+    keys[1] = false;
+  }
+    if (keys[2]) {
+    bob.turn(5);
+    keys[2] = false;
   }
   if (hyperspace == true) {
     background(0);
@@ -39,6 +54,16 @@ public void draw()
     {
       sky[i].shuffleStar();
     }
+    for (int i = 0; i < rocks.size(); i++)
+    {
+      rocks.get(i).respawn();
+    }
+  }
+  for (int i = 0; i < rocks.size(); i++)
+  {
+    rocks.get(i).move();
+    rocks.get(i).show();
+    if(rocks.get(i).crash()) rocks.get(i).respawn();
   }
   for (int i = 0; i < sky.length; i++)
   {
@@ -62,10 +87,10 @@ public void keyPressed()
     }
   }
   if (key == 'a') {
-    bob.turn(-5);
+    keys[1] = true;
   }
   if (key == 'd') {
-    bob.turn(5);
+    keys[2] = true;
   }
   if (key == 'h')
   {
@@ -88,4 +113,3 @@ public static void wait(int ms)
     Thread.currentThread().interrupt();
   }
 }
-
