@@ -37,7 +37,7 @@ class Spaceship extends Floater
     double dRadians =myPointDirection*(Math.PI/180);     
     //change coordinates of direction of travel    
     myXspeed += ((dAmount) * Math.cos(dRadians));    
-    myYspeed += ((dAmount) * Math.sin(dRadians)); 
+    myYspeed += ((dAmount) * Math.sin(dRadians));
   }  
 
   public void turn (double degreesOfRotation)   
@@ -54,7 +54,7 @@ class Spaceship extends Floater
 
     if (speed > 3) speed = 2.9;
     if (speed < -3) speed = -2.9;
-    
+
     if (myCenterX >width)
     {     
       myCenterX = 0;
@@ -80,8 +80,24 @@ class Spaceship extends Floater
     myCenterY = ((int)(Math.random()*height));
   }
 
+  public void shoot()
+  {
+    bullet.add(new Bullet((int)bob.getX(), (int)bob.getY(), bob.getPointDirection(), bob.getDirectionX(), bob.getDirectionY()));
+  }
+
   public double accessSpeed() {
     return speed;
+  }
+
+  public void stopVelocity()  
+  {
+    myCenterX = 350;
+    myCenterY = 350;
+    myXspeed = 0;
+    myYspeed = 0;
+    myPointDirection = 0;
+    speed = 0;
+    angle = 0;
   }
 
   public void setXspeed(int x) {
@@ -106,11 +122,21 @@ class Spaceship extends Floater
   public void setY(int y) {
     myCenterY = y;
   };   
-
+  public double getX() {
+    return myCenterX;
+  };    
+  public double getY() {
+    return myCenterY;
+  };   
   public void setPointDirection(int degrees) {
     myPointDirection = degrees;
   };   
-
+  public double getDirectionX() {
+    return Math.cos(myPointDirection*(Math.PI/180));
+  };    
+  public double getDirectionY() {
+    return Math.sin(myPointDirection*(Math.PI/180));
+  };   
   public double getPointDirection() {
     return myPointDirection;
   };
