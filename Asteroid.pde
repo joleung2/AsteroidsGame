@@ -28,7 +28,7 @@ class Asteroid extends Floater
     yCorners[9] = 9;
     xCorners[10] = 9;
     yCorners[10] = 5;
-    myColor = color(175,175,175);
+    myColor = color(175, 175, 175);
     rotSpeed = (int)(Math.random()*11 - 6);
   }
   public void move ()   
@@ -46,15 +46,35 @@ class Asteroid extends Floater
   }
   public boolean crash()
   {
-   if (dist((int)myCenterX, (int)myCenterY, (int)bob.accessCenterX(),(int) bob.accessCenterY()) < 20)
+    if (dist((int)myCenterX, (int)myCenterY, (int)bob.accessCenterX(), (int) bob.accessCenterY()) < 20)
       return true;
     else 
-      return false;
+    return false;
   }
-  public void setX(int x) {myCenterX = x;}
-  public int getX() {return (int)myCenterX;}
-  public void setY(int y) {myCenterY = y;}
-  public int getY() {return (int)myCenterY;}
-  public void setPointDirection(int degrees) {myPointDirection = degrees;}
-  public double getPointDirection() {return myPointDirection;}
+  public boolean destroy()
+  {
+    for (int i = 0; i < bullet.size(); i++) {
+      if (dist((int)myCenterX, (int)myCenterY, bullet.get(i).getX(), bullet.get(i).getY()) < 15)
+        return true;
+    }
+    return false;
+  }
+  public void setX(int x) {
+    myCenterX = x;
+  }
+  public int getX() {
+    return (int)myCenterX;
+  }
+  public void setY(int y) {
+    myCenterY = y;
+  }
+  public int getY() {
+    return (int)myCenterY;
+  }
+  public void setPointDirection(int degrees) {
+    myPointDirection = degrees;
+  }
+  public double getPointDirection() {
+    return myPointDirection;
+  }
 }
